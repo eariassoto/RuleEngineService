@@ -19,9 +19,20 @@ namespace RuleEngineWebAPI.Controllers
         private RuleEngineContext db = new RuleEngineContext();
 
         // GET: api/Rules
-        public IQueryable<RuleEngineService.Models.Rule> GetRules()
+        public List<Models.Rule> GetRules()
         {
-            return db.Rules;
+            var rules = db.Rules;
+            List<Models.Rule> listOfRules = new List<Models.Rule>();
+            foreach (var r in rules)
+            {
+                Models.Rule rule = new Models.Rule();
+                rule.ID = r.ID;
+                rule.MemberName = r.MemberName;
+                rule.TargetValue = r.TargetValue;
+                rule.Operator = r.Operator;
+                listOfRules.Add(rule);
+            }
+            return listOfRules;
         }
 
         // GET: api/Rules/5

@@ -1,9 +1,14 @@
 ﻿var ViewModel = function () {
     var self = this;
     self.people = ko.observableArray();
+    self.rules = ko.observableArray();
+    self.policies = ko.observableArray();
+
     self.error = ko.observable();
 
     var peopleUri = '/api/People/';
+    var rulesUri = '/api/Rules/';
+    var policiesUri = '/api/Policies/';
 
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
@@ -17,16 +22,20 @@
             self.error(errorThrown);
         });
     }
-
-    function getAllPeople() {
-        ajaxHelper(peopleUri, 'GET').done(function (data) {
-            self.people(data);
+    
+    function getAll(uri, obj) {
+        ajaxHelper(uri, 'GET').done(function (data) {
+            obj(data);
         });
     }
 
+    
     // Fetch the initial data.
-    getAllPeople();
+    getAll(peopleUri, self.people);
+    getAll(rulesUri, self.rules);
+    getAll(policiesUri, self.policies);
 
+    /*
     self.personDetail = ko.observable();
 
     self.getPersonDetail = function (item) {
@@ -36,9 +45,9 @@
     }
 
     self.deleteUserPosition = function (item) {
-        /* ajaxHelper(userpositionsUri + item.Id, 'DELETE').done(function (item) {
+         ajaxHelper(userpositionsUri + item.Id, 'DELETE').done(function (item) {
              console.log(item);
-         });*/
+         });
     }
 
     self.newUserPosition = {
@@ -57,7 +66,7 @@
         ajaxHelper(userpositionsUri, 'POST', userposition).done(function (item) {
             self.userpositions.push(item);
         });
-    }
+    }*/
 };
 
 ko.applyBindings(new ViewModel());

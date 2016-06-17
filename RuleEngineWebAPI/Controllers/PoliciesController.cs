@@ -19,9 +19,19 @@ namespace RuleEngineWebAPI.Controllers
         private RuleEngineContext db = new RuleEngineContext();
 
         // GET: api/Policies
-        public IQueryable<Policy> GetPolicies()
+        public List<Models.Policy> GetPolicies()
         {
-            return db.Policies;
+            var policies = db.Policies;
+            List<Models.Policy> listOfPolicies = new List<Models.Policy>();
+            foreach (var p in policies)
+            {
+                Models.Policy policy = new Models.Policy();
+                policy.ID = p.ID;
+                policy.Name = p.Name;
+                policy.Description = p.Description;
+                listOfPolicies.Add(policy);
+            }
+            return listOfPolicies;
         }
 
         // GET: api/Policies/5
