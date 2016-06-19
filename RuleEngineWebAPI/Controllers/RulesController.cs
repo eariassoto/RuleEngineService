@@ -35,6 +35,23 @@ namespace RuleEngineWebAPI.Controllers
             return listOfRules;
         }
 
+        // GET: api/Rules
+        public List<Models.Rule> GetRules(int Policy)
+        {
+            var rules = db.Policies.Find(Policy).Rules;
+            List<Models.Rule> listOfRules = new List<Models.Rule>();
+            foreach (var r in rules)
+            {
+                Models.Rule rule = new Models.Rule();
+                rule.ID = r.ID;
+                rule.MemberName = r.MemberName;
+                rule.TargetValue = r.TargetValue;
+                rule.Operator = r.Operator;
+                listOfRules.Add(rule);
+            }
+            return listOfRules;
+        }
+
         // GET: api/Rules/5
         [ResponseType(typeof(RuleEngineService.Models.Rule))]
         public async Task<IHttpActionResult> GetRule(int id)

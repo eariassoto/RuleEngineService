@@ -1,38 +1,5 @@
 ﻿<h1>Rule Engine Service</h1>
 <hr />
-<div class="row">
-    <div class="col-md-6">
-        <h2>Rules</h2>
-        <hr/>
-        <table class="table table-bordered table-striped table-hover">
-            <thead> <tr> <th>ID</th> <th>MemberName</th> <th>Operator</th> <th>TargetValue</th></tr> </thead>
-            <tbody data-bind="foreach: rules">
-                <tr>
-                    <th scope="row"><span data-bind="text: ID"></span></th>
-                    <td><span data-bind="text: MemberName"></span></td>
-                    <td><span data-bind="text: Operator"></span></td>
-                    <td><span data-bind="text: TargetValue"></span></td>
-                    @*<td><a href="#" class="btn btn-primary" data-bind="click: $parent.getPersonDetail">Details</a></td>*@
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-6">
-        <h2>Policies</h2>
-        <hr />
-        <table class="table table-bordered table-striped table-hover">
-            <thead> <tr> <th>ID</th> <th>Name</th> <th>Description</th> </tr> </thead>
-            <tbody data-bind="foreach: policies">
-                <tr>
-                    <th scope="row"><span data-bind="text: ID"></span></th>
-                    <td><span data-bind="text: Name"></span></td>
-                    <td><span data-bind="text: Description"></span></td>
-                    @*<td><a href="#" class="btn btn-primary" data-bind="click: $parent.getPersonDetail">Details</a></td>*@
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-md-12">
@@ -51,9 +18,55 @@
                     <td><span data-bind="text: CholesterolLevel"></span></td>
                     <td><span data-bind="text: Temperature"></span></td>
                     <td><input type="checkbox" data-bind="checked: HasDiabetes" /></td>
-                    <td><input type="checkbox" data-bind="checked: HasCough" /></td>
+                    <td><input type="checkbox" data-bind="checked: HasCough"  /></td>
                     <td><input type="checkbox" data-bind="checked: HasBlisters" /></td>
                     @*<td><a href="#" class="btn btn-primary" data-bind="click: $parent.getPersonDetail">Details</a></td>*@
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Policies</h2>
+        <hr />
+        <table class="table table-bordered table-striped table-hover">
+            <thead> <tr> <th>ID</th> <th>Name</th> <th>Description</th> <th></th> </tr> </thead>
+            <tbody data-bind="foreach: policies">
+                <tr>
+                    <th scope="row"><span data-bind="text: ID"></span></th>
+                    <td><span data-bind="text: Name"></span></td>
+                    <td><span data-bind="text: Description"></span></td>
+                    <td><a href="#" class="btn btn-primary" data-bind="click: $parent.getRules">Get rules</a></td>
+                    <td><a href="#" class="btn btn-primary" data-bind="click: $parent.evaluate">Evaluate</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Rules</h2>
+        <hr />
+        <table class="table table-bordered table-striped table-hover">
+            <thead> <tr> <th>ID</th> <th>MemberName</th> <th>Operator</th> <th>TargetValue</th></tr> </thead>
+            <tbody data-bind="foreach: rules">
+                <tr>
+                    <th scope="row"><span data-bind="text: ID"></span></th>
+                    <td><span data-bind="text: MemberName"></span></td>
+                    <td><span data-bind="text: Operator"></span></td>
+                    <td><span data-bind="text: TargetValue"></span></td>
+                    @*<td><a href="#" class="btn btn-primary" data-bind="click: $parent.getPersonDetail">Details</a></td>*@
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h2>Evaluated People</h2>
+        <hr />
+        <table class="table table-bordered table-striped table-hover">
+            <thead> <tr> <th>ID</th> <th>Name</th> </tr> </thead>
+            <tbody data-bind="foreach: evaluatedPeople">
+                <tr>
+                    <th scope="row"><span data-bind="text: ID"></span></th>
+                    <td><span data-bind="text: Name"></span></td>
                 </tr>
             </tbody>
         </table>

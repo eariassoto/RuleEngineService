@@ -57,6 +57,7 @@
       <DependentUpon>201605250042332_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Evaluator.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Policy.cs" />
     <Compile Include="Models\Rule.cs" />

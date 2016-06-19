@@ -2,6 +2,7 @@
     var self = this;
     self.people = ko.observableArray();
     self.rules = ko.observableArray();
+    self.evaluatedPeople = ko.observableArray();
     self.policies = ko.observableArray();
 
     self.error = ko.observable();
@@ -9,6 +10,7 @@
     var peopleUri = '/api/People/';
     var rulesUri = '/api/Rules/';
     var policiesUri = '/api/Policies/';
+    var evaluatorUri = '/api/Evaluator/';
 
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
@@ -32,41 +34,16 @@
     
     // Fetch the initial data.
     getAll(peopleUri, self.people);
-    getAll(rulesUri, self.rules);
     getAll(policiesUri, self.policies);
 
-    /*
-    self.personDetail = ko.observable();
-
-    self.getPersonDetail = function (item) {
-        ajaxHelper(peopleUri + item.Id, 'GET').done(function (data) {
-            self.personDetail(data);
-        });
+    self.getRules = function (item) {
+        getAll(rulesUri + '?Policy=' +item.ID, self.rules);
     }
 
-    self.deleteUserPosition = function (item) {
-         ajaxHelper(userpositionsUri + item.Id, 'DELETE').done(function (item) {
-             console.log(item);
-         });
+    self.evaluate = function (item) {
+        getAll(evaluatorUri + item.ID, self.evaluatedPeople);
     }
 
-    self.newUserPosition = {
-        CompassDirection: ko.observable(),
-        Latitude: ko.observable(),
-        Longitude: ko.observable()
-    }
-
-    self.addUserPosition = function (formElement) {
-        var userposition = {
-            CompassDirection: self.newUserPosition.CompassDirection(),
-            Latitude: self.newUserPosition.Latitude(),
-            Longitude: self.newUserPosition.Longitude()
-        };
-
-        ajaxHelper(userpositionsUri, 'POST', userposition).done(function (item) {
-            self.userpositions.push(item);
-        });
-    }*/
 };
 
 ko.applyBindings(new ViewModel());
